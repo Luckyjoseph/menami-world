@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>✨ Menami ✨</title>
+<meta name="theme-color" content="#0a0a0f">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink: #ff2d95;
+    --pink-soft: #ff8fd1;
+    --black: #060608;
+    --black-2: #0e0e14;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0;padding:0;width:100%;height:100%;
+    background:var(--black);
+    color:#fff;
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+    scroll-behavior:smooth;
+  }
+  canvas#bg{
+    position:fixed;inset:0;z-index:0;
+  }
+  .wrap{
+    position:relative;z-index:2;
+    min-height:100vh;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    text-align:center;
+    padding:6vh 6vw;
+  }
+  .glow-ring{
+    position:absolute;
+    width:70vmin;height:70vmin;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(255,45,149,0.35) 0%, rgba(255,45,149,0) 70%);
+    filter:blur(10px);
+    animation:pulse 4s ease-in-out infinite;
+    z-index:0;
+  }
+  @keyframes pulse{
+    0%,100%{transform:scale(1);opacity:.7;}
+    50%{transform:scale(1.15);opacity:1;}
+  }
+  h1.name{
+    font-family:'Great Vibes', cursive;
+    font-size:clamp(3.5rem, 14vw, 9rem);
+    margin:0;
+    line-height:1;
+    background:linear-gradient(90deg,#fff 0%, var(--pink-soft) 35%, var(--pink) 60%, #fff 100%);
+    background-size:300% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:shine 4s linear infinite, floaty 5s ease-in-out infinite;
+    text-shadow:0 0 40px rgba(255,45,149,.35);
+    position:relative;
+    z-index:2;
+  }
+  @keyframes shine{
+    to{background-position:300% center;}
+  }
+  @keyframes floaty{
+    0%,100%{transform:translateY(0px);}
+    50%{transform:translateY(-12px);}
+  }
+  .subtitle{
+    margin-top:1.2rem;
+    font-weight:300;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    font-size:.85rem;
+    color:var(--pink-soft);
+    opacity:0;
+    animation:fadeUp 1.2s ease forwards 1.4s;
+  }
+  .typewriter{
+    margin-top:2.2rem;
+    font-size:clamp(1rem,3vw,1.4rem);
+    font-weight:300;
+    min-height:2.4em;
+    color:#fdeefa;
+    border-right:2px solid var(--pink);
+    white-space:pre-wrap;
+    max-width:40ch;
+  }
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  .badge{
+    margin-top:2.6rem;
+    display:inline-flex;
+    gap:.5rem;
+    align-items:center;
+    padding:.5rem 1.2rem;
+    border:1px solid rgba(255,45,149,.5);
+    border-radius:999px;
+    font-size:.8rem;
+    letter-spacing:.05em;
+    color:var(--pink-soft);
+    background:rgba(255,45,149,.06);
+    opacity:0;
+    animation:fadeUp 1.2s ease forwards 1.8s;
+  }
+  .surprise-btn{
+    margin-top:3rem;
+    padding:1rem 2.6rem;
+    border:none;
+    border-radius:999px;
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:1rem;
+    letter-spacing:.05em;
+    color:#fff;
+    background:linear-gradient(135deg,var(--pink),#9b1b5e);
+    cursor:pointer;
+    box-shadow:0 0 25px rgba(255,45,149,.55), inset 0 0 0 1px rgba(255,255,255,.15);
+    transition:transform .25s ease, box-shadow .25s ease;
+    opacity:0;
+    animation:fadeUp 1.2s ease forwards 2.2s;
+  }
+  .surprise-btn:hover{
+    transform:translateY(-3px) scale(1.04);
+    box-shadow:0 0 40px rgba(255,45,149,.8), inset 0 0 0 1px rgba(255,255,255,.25);
+  }
+  .surprise-btn:active{transform:scale(.97);}
+
+  section.msg{
+    position:relative;z-index:2;
+    max-width:720px;
+    margin:0 auto 10vh;
+    padding:4vh 6vw;
+    text-align:center;
+  }
+  section.msg h2{
+    font-size:clamp(1.6rem,4vw,2.4rem);
+    background:linear-gradient(90deg,var(--pink-soft),#fff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    margin-bottom:1rem;
+  }
+  section.msg p{
+    color:#d9d2dd;
+    line-height:1.8;
+    font-weight:300;
+    font-size:1.05rem;
+  }
+
+  .hearts-row{
+    display:flex;justify-content:center;gap:1.2rem;margin-top:2rem;flex-wrap:wrap;
+  }
+  .hearts-row span{
+    font-size:1.6rem;
+    animation:floaty 3s ease-in-out infinite;
+    filter:drop-shadow(0 0 10px rgba(255,45,149,.6));
+  }
+  .hearts-row span:nth-child(2){animation-delay:.3s;}
+  .hearts-row span:nth-child(3){animation-delay:.6s;}
+  .hearts-row span:nth-child(4){animation-delay:.9s;}
+  .hearts-row span:nth-child(5){animation-delay:1.2s;}
+
+  footer{
+    position:relative;z-index:2;
+    text-align:center;
+    padding:3rem 1rem 4rem;
+    color:#766;
+    font-size:.8rem;
+    letter-spacing:.05em;
+  }
+  footer span{color:var(--pink-soft);}
+
+  .card-grid{
+    position:relative;z-index:2;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:1.2rem;
+    max-width:900px;
+    margin:0 auto 8vh;
+    padding:0 6vw;
+  }
+  .card{
+    background:linear-gradient(160deg, rgba(255,45,149,.12), rgba(255,255,255,.02));
+    border:1px solid rgba(255,45,149,.25);
+    border-radius:18px;
+    padding:1.6rem 1.2rem;
+    backdrop-filter:blur(6px);
+    transition:transform .3s ease, border-color .3s ease;
+  }
+  .card:hover{
+    transform:translateY(-8px);
+    border-color:var(--pink);
+  }
+  .card .emoji{font-size:2.2rem;display:block;margin-bottom:.6rem;}
+  .card h3{margin:.2rem 0;font-size:1.05rem;color:#fff;}
+  .card p{margin:0;font-size:.85rem;color:#c9b9cb;font-weight:300;line-height:1.5;}
+
+  #confetti-canvas{
+    position:fixed;inset:0;pointer-events:none;z-index:5;
+  }
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<canvas id="confetti-canvas"></canvas>
+
+<div class="wrap">
+  <div class="glow-ring"></div>
+  <h1 class="name">Menami</h1>
+  <div class="subtitle">a.k.a. Mimi ✨</div>
+  <div class="typewriter" id="typewriter"></div>
+  <div class="badge">💖 built with love &amp; code, just for you</div>
+  <button class="surprise-btn" id="surpriseBtn">Tap for a Surprise 🎉</button>
+</div>
+
+<section class="msg">
+  <h2>This little corner of the internet is yours.</h2>
+  <p>
+    Someone who thinks the world of you asked for something special, in your
+    favorite colors, made just to make you smile. So here it is — glowing,
+    sparkling, and a little bit extra... just like you deserve. 💅🖤💗
+  </p>
+  <div class="hearts-row">
+    <span>🖤</span><span>💗</span><span>✨</span><span>💗</span><span>🖤</span>
+  </div>
+</section>
+
+<div class="card-grid">
+  <div class="card"><span class="emoji">🌸</span><h3>Pretty</h3><p>Because pink and black just hit different.</p></div>
+  <div class="card"><span class="emoji">👑</span><h3>Iconic</h3><p>Menami walks in, the room gets brighter.</p></div>
+  <div class="card"><span class="emoji">💫</span><h3>Unstoppable</h3><p>A whole vibe, 24/7, no days off.</p></div>
+  <div class="card"><span class="emoji">🎀</span><h3>One of One</h3><p>There's truly nobody else quite like Mimi.</p></div>
+</div>
+
+<footer>
+  made with <span>🖤 &amp; 💗</span> — a tiny gift from your biggest fan
+</footer>
+
+<script>
+  // ---------- Particle background ----------
+  const bg = document.getElementById('bg');
+  const ctx = bg.getContext('2d');
+  let w, h, particles;
+
+  function resize(){
+    w = bg.width = window.innerWidth;
+    h = bg.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function rand(min, max){ return Math.random()*(max-min)+min; }
+
+  function makeParticles(n){
+    const arr = [];
+    for(let i=0;i<n;i++){
+      arr.push({
+        x: rand(0,w),
+        y: rand(0,h),
+        r: rand(0.6, 2.6),
+        vx: rand(-0.15,0.15),
+        vy: rand(-0.25,-0.05),
+        hue: Math.random() > 0.35 ? 'pink' : 'white',
+        alpha: rand(0.2, 0.9),
+        twinkle: rand(0.01,0.03)
+      });
+    }
+    return arr;
+  }
+  particles = makeParticles(Math.min(140, Math.floor(w*h/9000)));
+
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle = '#060608';
+    ctx.fillRect(0,0,w,h);
+
+    for(const p of particles){
+      p.y += p.vy;
+      p.x += p.vx;
+      p.alpha += (Math.random() > 0.5 ? p.twinkle : -p.twinkle);
+      if(p.alpha < 0.15) p.alpha = 0.15;
+      if(p.alpha > 1) p.alpha = 1;
+      if(p.y < -10){ p.y = h+10; p.x = rand(0,w); }
+      if(p.x < -10) p.x = w+10;
+      if(p.x > w+10) p.x = -10;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = p.hue === 'pink'
+        ? `rgba(255,45,149,${p.alpha})`
+        : `rgba(255,255,255,${p.alpha*0.8})`;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = p.hue === 'pink' ? '#ff2d95' : '#ffffff';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // ---------- Typewriter ----------
+  const lines = [
+    "Smart. Stylish. Unforgettable.",
+    "Black & pink — just like you like it.",
+    "Mimi, this one's all for you. 💗",
+    "Hope this made you smile today."
+  ];
+  const twEl = document.getElementById('typewriter');
+  let li = 0, ci = 0, deleting = false;
+
+  function type(){
+    const current = lines[li];
+    if(!deleting){
+      ci++;
+      twEl.textContent = current.slice(0, ci);
+      if(ci === current.length){
+        deleting = true;
+        setTimeout(type, 1600);
+        return;
+      }
+    } else {
+      ci--;
+      twEl.textContent = current.slice(0, ci);
+      if(ci === 0){
+        deleting = false;
+        li = (li+1) % lines.length;
+      }
+    }
+    setTimeout(type, deleting ? 35 : 65);
+  }
+  setTimeout(type, 1500);
+
+  // ---------- Confetti ----------
+  const cc = document.getElementById('confetti-canvas');
+  const cctx = cc.getContext('2d');
+  function resizeC(){ cc.width = window.innerWidth; cc.height = window.innerHeight; }
+  window.addEventListener('resize', resizeC);
+  resizeC();
+
+  let confetti = [];
+  const colors = ['#ff2d95', '#ff8fd1', '#ffffff', '#1a1a1a', '#ff6fb8'];
+
+  function burst(){
+    for(let i=0;i<140;i++){
+      confetti.push({
+        x: cc.width/2,
+        y: cc.height/2,
+        vx: rand(-9,9),
+        vy: rand(-12,-2),
+        g: 0.25,
+        size: rand(5,11),
+        color: colors[Math.floor(Math.random()*colors.length)],
+        rot: rand(0,360),
+        vr: rand(-8,8),
+        life: 0,
+        shape: Math.random() > 0.5 ? 'rect' : 'circle'
+      });
+    }
+  }
+
+  function animateConfetti(){
+    cctx.clearRect(0,0,cc.width,cc.height);
+    confetti.forEach(p=>{
+      p.vy += p.g;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.vr;
+      p.life++;
+      cctx.save();
+      cctx.translate(p.x,p.y);
+      cctx.rotate(p.rot*Math.PI/180);
+      cctx.fillStyle = p.color;
+      cctx.globalAlpha = Math.max(0, 1 - p.life/140);
+      if(p.shape === 'rect'){
+        cctx.fillRect(-p.size/2, -p.size/2, p.size, p.size*0.6);
+      } else {
+        cctx.beginPath();
+        cctx.arc(0,0,p.size/2,0,Math.PI*2);
+        cctx.fill();
+      }
+      cctx.restore();
+    });
+    confetti = confetti.filter(p => p.life < 140 && p.y < cc.height+50);
+    requestAnimationFrame(animateConfetti);
+  }
+  animateConfetti();
+
+  const phrases = [
+    "You're literally glowing, Mimi 💗",
+    "Menami = Main Character Energy 🖤",
+    "Certified icon behavior ✨",
+    "Prettiest in black & pink, always 🎀",
+    "The surprise is... you're amazing!"
+  ];
+  const btn = document.getElementById('surpriseBtn');
+  btn.addEventListener('click', () => {
+    burst();
+    btn.textContent = phrases[Math.floor(Math.random()*phrases.length)];
+    setTimeout(()=>{ btn.textContent = "Tap for a Surprise 🎉"; }, 2600);
+  });
+</script>
+</body>
+</html>
