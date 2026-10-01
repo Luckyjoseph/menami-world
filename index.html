@@ -165,6 +165,84 @@
   .hearts-row span:nth-child(4){animation-delay:.9s;}
   .hearts-row span:nth-child(5){animation-delay:1.2s;}
 
+  /* ---------- Love letter section ---------- */
+  section.love{
+    position:relative;z-index:2;
+    max-width:620px;
+    margin:0 auto 9vh;
+    padding:0 6vw;
+  }
+  .letter{
+    position:relative;
+    background:linear-gradient(165deg, rgba(255,45,149,.10), rgba(255,255,255,.02));
+    border:1px solid rgba(255,45,149,.35);
+    border-radius:24px;
+    padding:3rem 2rem;
+    text-align:center;
+    overflow:hidden;
+    box-shadow:0 0 50px rgba(255,45,149,.15), inset 0 0 40px rgba(255,45,149,.05);
+  }
+  .letter::before{
+    content:"";
+    position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 0%, rgba(255,45,149,.18), transparent 60%);
+    pointer-events:none;
+  }
+  .letter .stamp{
+    font-size:2.6rem;
+    display:inline-block;
+    animation:beat 1.4s ease-in-out infinite;
+    filter:drop-shadow(0 0 14px rgba(255,45,149,.7));
+  }
+  @keyframes beat{
+    0%,100%{transform:scale(1);}
+    25%{transform:scale(1.18);}
+    40%{transform:scale(0.95);}
+    60%{transform:scale(1.1);}
+  }
+  .letter h2{
+    font-family:'Great Vibes', cursive;
+    font-size:clamp(2.2rem,6vw,3rem);
+    margin:1rem 0 1.6rem;
+    background:linear-gradient(90deg,var(--pink-soft),#fff,var(--pink-soft));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .letter p{
+    color:#efe3ec;
+    font-weight:300;
+    line-height:1.95;
+    font-size:1.02rem;
+    margin:0 0 1.1rem;
+    text-align:left;
+  }
+  .letter p:last-of-type{margin-bottom:0;}
+  .letter .sign{
+    margin-top:1.8rem;
+    font-family:'Great Vibes', cursive;
+    font-size:1.8rem;
+    color:var(--pink-soft);
+    text-align:right;
+  }
+  .love-float{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    border-radius:24px;
+  }
+  .love-float span{
+    position:absolute;
+    bottom:-10%;
+    font-size:1.1rem;
+    opacity:.55;
+    animation:riseHeart linear infinite;
+  }
+  @keyframes riseHeart{
+    0%{transform:translateY(0) rotate(0deg); opacity:0;}
+    10%{opacity:.6;}
+    100%{transform:translateY(-130%) rotate(25deg); opacity:0;}
+  }
+
   footer{
     position:relative;z-index:2;
     text-align:center;
@@ -227,6 +305,18 @@
   </p>
   <div class="hearts-row">
     <span>🖤</span><span>💗</span><span>✨</span><span>💗</span><span>🖤</span>
+  </div>
+</section>
+
+<section class="love">
+  <div class="letter">
+    <div class="love-float" id="loveFloat"></div>
+    <span class="stamp">💌</span>
+    <h2>Dear Mimi,</h2>
+    <p>I just want you to know that you mean so much more to me than words can really hold. You're not just someone I care about — you're someone I think about, someone who makes ordinary days feel a little lighter, a little brighter, just by being you.</p>
+    <p>Every little thing about you — your laugh, your energy, the way you light up a room without even trying — it all matters to me more than you probably realize. I care about you deeply, Mimi, and that's not something that changes with time.</p>
+    <p>So this page, this whole little corner of the internet, is my way of saying: you're loved, you're appreciated, and you're truly special to me. Always have been. 🖤💗</p>
+    <div class="sign">— with all my heart</div>
   </div>
 </section>
 
@@ -388,6 +478,21 @@
     requestAnimationFrame(animateConfetti);
   }
   animateConfetti();
+
+  // ---------- Floating hearts inside the love letter ----------
+  const loveFloat = document.getElementById('loveFloat');
+  if (loveFloat) {
+    const symbols = ['🖤','💗','✨','💕'];
+    for (let i = 0; i < 14; i++) {
+      const s = document.createElement('span');
+      s.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+      s.style.left = rand(2, 95) + '%';
+      s.style.animationDuration = rand(6, 12) + 's';
+      s.style.animationDelay = rand(0, 8) + 's';
+      s.style.fontSize = rand(0.8, 1.6) + 'rem';
+      loveFloat.appendChild(s);
+    }
+  }
 
   const phrases = [
     "You're literally glowing, Mimi 💗",
